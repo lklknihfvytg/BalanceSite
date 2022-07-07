@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}General{% endblock %}
+
+{% block content %}
+<section>
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Leverage</th>
+          <th>entryPrice</th>
+          <th>positionAmt</th>
+          <th>liq</th>
+          <th>markPrice</th>
+          <th>unrealizedProfit</th>
+          <th>notional</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+        {% for el in nj %}
+			<tr>
+				<td>{{el.tic}}</td>
+				<td>{{el.leverage}}</td>
+				<td>{{el.entry_price}}</td>
+				<td>{{el.position_amt}}</td>
+				<td>{{el.liquidation_price}}</td>
+				<td>{{el.mark_price}}</td>
+				{% if el.unrealized_profit < -0.01 %}
+					<td class="red">{{el.unrealized_profit}}</td>
+				{% else %}
+					<td class="green">{{el.unrealized_profit}}</td>
+				{% endif %}
+				<td>{{el.notional}}</td>
+			</tr>
+		{% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+{% endblock %}
